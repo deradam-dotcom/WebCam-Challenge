@@ -1,23 +1,85 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState, useEffect } from "react";
 
 function App() {
+  let [cities, setCities] = useState([]);
+  let [cam, setCam] = useState("");
+  let [showControl, setShowControl] = useState(false);
+
+  let showCam = (indx) => {
+    let newCam = cam;
+    cities.map((citie, indexC) => {
+      if (indexC === indx) {
+        newCam = citie.source;
+      }
+    });
+    setCam(newCam);
+  };
+
+  let getControl = (camera) => {
+    setCam(camera);
+    setShowControl(true);
+  };
+  let getCameras = (camera) => {
+    setCam(camera);
+    setShowControl(false);
+  };
+
+  console.log(cities);
+  useEffect(() => {
+    fetch("http://runningios.com/screamingbox/cameras.json")
+      .then((res) => res.json())
+      .then((data) =>
+        data.map(
+          (citie) => (
+            citie.id === "delhi" && setCam(citie.source), setCities(data)
+          )
+        )
+      );
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="panel-container">
+        <div
+          className="cam-container"
+          style={{ backgroundImage: `url(${cam})` }}
+        ></div>
+        <div className="cities-container">
+          <div className="btn-container">
+            <button
+              style={{ backgroundColor: "white", color: "grey" }}
+              onClick={() => getControl(cam)}
+            >
+              CONTROL
+            </button>
+            <button
+              style={{ backgroundColor: "grey", color: "white" }}
+              onClick={() => getCameras(cam)}
+            >
+              CAMERAS
+            </button>
+          </div>
+
+          {!showControl ? (
+            <div className="citie-container">
+              {cities.map((citie, indexC) => (
+                <div
+                  className="citie-name"
+                  key={indexC}
+                  onClick={() => showCam(indexC)}
+                >
+                  {citie.name}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="control-container">
+              <h3>Click in the circle & Drag</h3>
+              <div className="drag-circle"></div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
