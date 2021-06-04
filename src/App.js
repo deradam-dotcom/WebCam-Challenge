@@ -25,7 +25,6 @@ function App() {
     setShowControl(false);
   };
 
-  console.log(cities);
   useEffect(() => {
     fetch("http://runningios.com/screamingbox/cameras.json")
       .then((res) => res.json())
@@ -47,13 +46,19 @@ function App() {
         <div className="cities-container">
           <div className="btn-container">
             <button
-              style={{ backgroundColor: "white", color: "grey" }}
+              style={{
+                backgroundColor: !showControl ? "white" : "grey",
+                color: !showControl ? "grey" : "white",
+              }}
               onClick={() => getControl(cam)}
             >
               CONTROL
             </button>
             <button
-              style={{ backgroundColor: "grey", color: "white" }}
+              style={{
+                backgroundColor: !showControl ? "grey" : "white",
+                color: !showControl ? "white" : "grey",
+              }}
               onClick={() => getCameras(cam)}
             >
               CAMERAS
