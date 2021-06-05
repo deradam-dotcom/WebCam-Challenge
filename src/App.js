@@ -94,7 +94,7 @@ function App() {
               <h3>Click in the circle & Drag</h3>
               <div
                 className="drag-circle"
-                onMouseMoveCapture={(e) => startingPoint(e)}
+                onMouseMove={(e) => startingPoint(e)}
               ></div>
             </div>
           )}
