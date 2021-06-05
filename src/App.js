@@ -5,8 +5,8 @@ function App() {
   let [cities, setCities] = useState([]);
   let [cam, setCam] = useState("");
   let [showControl, setShowControl] = useState(false);
-  let [position, setPosition] = useState({ x: 0, y: 0 });
-  console.log("****", position);
+  let [xAssis, setXassis] = useState(0);
+  let [yAssis, setYassis] = useState(0);
   let showCam = (indx) => {
     let newCam = cam;
     cities.map((citie, indexC) => {
@@ -27,13 +27,10 @@ function App() {
   };
 
   let startingPoint = (e) => {
-    //console.log(e.movementX, e.movementY);
-    position = { x: 0, y: 0 };
-    let xAxis = e.movementX;
-    let yAxis = e.movementY;
-    let newPosition = position;
-    newPosition = { x: xAxis, y: yAxis };
-    setPosition(newPosition);
+    let x = e.movementX;
+    let y = e.movementY;
+    setXassis(x);
+    setYassis(y);
   };
 
   useEffect(() => {
@@ -52,7 +49,11 @@ function App() {
       <div className="panel-container">
         <div
           className="cam-container"
-          style={{ backgroundImage: `url(${cam})` }}
+          style={{
+            backgroundImage: `url(${cam})`,
+            backgroundPositionX: xAssis + "px",
+            backgroundPositionY: yAssis + "px",
+          }}
         ></div>
         <div className="cities-container">
           <div className="btn-container">
@@ -93,7 +94,7 @@ function App() {
               <h3>Click in the circle & Drag</h3>
               <div
                 className="drag-circle"
-                onMouseMove={(e) => startingPoint(e)}
+                onMouseMoveCapture={(e) => startingPoint(e)}
               ></div>
             </div>
           )}
