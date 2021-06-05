@@ -47,14 +47,9 @@ function App() {
   return (
     <div className="App">
       <div className="panel-container">
-        <div
-          className="cam-container"
-          style={{
-            backgroundImage: `url(${cam})`,
-            backgroundPositionX: xAssis + "px",
-            backgroundPositionY: yAssis + "px",
-          }}
-        ></div>
+        <div className="cam-container">
+          <img src={cam} alt="cam" />
+        </div>
         <div className="cities-container">
           <div className="btn-container">
             <button
