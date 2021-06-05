@@ -48,7 +48,11 @@ function App() {
     <div className="App">
       <div className="panel-container">
         <div className="cam-container">
-          <img src={cam} alt="cam" />
+          <img
+            src={cam}
+            alt="cam"
+            style={{ top: yAssis + "px", left: xAssis + "px" }}
+          />
         </div>
         <div className="cities-container">
           <div className="btn-container">
