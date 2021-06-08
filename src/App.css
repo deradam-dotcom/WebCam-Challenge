@@ -31,7 +31,7 @@
 .citie-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .citie-name {
@@ -44,11 +44,10 @@
 .btn-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-
+  align-items: flex-start;
   width: 100%;
   height: 10%;
-  margin-top: 1rem;
+  margin-bottom: 4rem;
 }
 button {
   border: 1px solid black;
